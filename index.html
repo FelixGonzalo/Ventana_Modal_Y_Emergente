@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <title>Document</title>
+</head>
+<body>
+  <div class="app">
+    <h1>Title</h1>
+    <p>
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi voluptates nam eligendi sed. Facilis voluptatem ea
+      debitis, magnam nesciunt dolor deleniti ad odit quasi eligendi perspiciatis corrupti, voluptatum quo hic praesentium
+      pariatur corporis suscipit iusto adipisci non officiis error. Voluptatum provident tenetur nostrum voluptatem atque
+      consectetur nisi delectus accusamus! Quos nam fugit maxime at enim eos doloribus. Possimus nulla voluptas perspiciatis
+      repudiandae rerum voluptatem, sequi eum sed inventore deleniti, facilis molestias ad error est. Iusto quia aut quidem
+      tempora. Necessitatibus dolorem alias quaerat perferendis molestiae quisquam nobis laborum mollitia velit corrupti
+      reiciendis, rem quod labore tempore est! Temporibus, vel cupiditate.
+    </p>
+    <button id="modal_btn1">Abrir modal 1</button>
+    <button id="modal_btn2">Abrir modal 2</button>
+  </div>
+  <div id="modal_container">
+  </div>
+  <script>
+    const modal_container = document.getElementById("modal_container")
+    const modal_btn1 = document.getElementById("modal_btn1")
+    const modal_btn2 = document.getElementById("modal_btn2")
+
+    window.addEventListener("load", () => {
+      createModal(`
+        <h3 class="modal-title">Abrir modal Emergente</h3>
+        <img class="modal-img" src="https://yt3.ggpht.com/yti/APfAmoFrCDcsYeibb3_PUiP6Ez2nvJgrW8860UDcouGRdw=s108-c-k-c0x00ffffff-no-rj" alt="">
+        <p class="modal-description">Hola modal emergente</p>
+        <button class="modal-btn">suscribirse</button>
+        <a href="https://www.google.com/" target="_blank" rel="noopener noreferrer" class="modal-link">Link</a>
+      `, "modal-aparecer")
+    })
+
+    modal_btn1.addEventListener("click", () => {
+      createModal(`
+        <h3>Abrir modal 1</h3>
+        <img src="https://yt3.ggpht.com/yti/APfAmoFrCDcsYeibb3_PUiP6Ez2nvJgrW8860UDcouGRdw=s108-c-k-c0x00ffffff-no-rj" alt="">
+      `, "modal-desdeArriba")
+    })
+
+    modal_btn2.addEventListener("click", () => {
+        createModal(`
+        <h3>Abrir modal 2</h3>
+        <a href="https://www.youtube.com/channel/UCDE0iwW6YVGkf3EW6gKXYZw" target="_blank" rel="noopener noreferrer">Suscribirse !!</a>
+      `,"modal-desdeAbajo" )
+    })
+
+    const createModal = (content = "sin contenido", style = "") => {
+      modal_container.innerHTML = `
+        <div class="modal" id="modal">
+          <div class="modal-content ${style}">
+            ${content}
+            <button class="modal-btn-closed" id="modal_btn_closed">x</button>
+          </div>
+        </div>
+      `
+
+      document.getElementById("modal").addEventListener("click", (e) => {
+        console.log(e.target.id)
+        if (e.target.id === "modal" || e.target.id === "modal_btn_closed") {
+          modal_container.innerHTML = ""
+        }
+      })
+    }
+
+  </script>
+</body>
+</html>
